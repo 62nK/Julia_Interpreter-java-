@@ -12,7 +12,6 @@ public class Node_Program {
     private String end;
 
     // Variables
-    private String function_statement;
     private boolean syntax_error;
 
     // Constructors
@@ -20,22 +19,26 @@ public class Node_Program {
     public Node_Program(String program){
         // Store program string
         this.program = program.trim();
+        String function_statement;
 
         // Identify children
-        function_statement = this.program.substring(0, this.program.indexOf("\n"));
-        function = function_statement.substring(0, function_statement.indexOf(" "));
+        function_statement = this.program.substring(0, this.program.indexOf("\n")).trim();
+        function = function_statement.substring(0, function_statement.indexOf(" ")).trim();
         function_id = function_statement.substring(program.indexOf(" ")).trim();
         block = this.program.substring(this.program.indexOf("\n"), Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n"))).trim();
-        end = this.program.substring(Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n") )+1);
+        end = this.program.substring(Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n") )+1).trim();
 
         // Syntax check
         syntax_error = function_error() || function_id_error() || end_error();
+
+        if(!block.isEmpty())
+            expand(block);
     }
 
     // Methods
 
     // Syntax check
-    private boolean syntax_error(){
+    public boolean syntax_error(){
         return syntax_error;
     }
     private boolean function_error(){
@@ -55,6 +58,11 @@ public class Node_Program {
             return false;
         else
             return true;
+    }
+
+    // Create children
+    private void expand(String block){
+        // create new node
     }
 
     // Output

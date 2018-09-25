@@ -1,0 +1,6 @@
+function quadratic2()
+    sqr_term = sqrt(b^2-4a*c)
+    r1 = quadratic(a, sqr_term, b)
+    r2 = quadratic(a, -sqr_term, b)
+    r1, r2
+end

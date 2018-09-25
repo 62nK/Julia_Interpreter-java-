@@ -9,7 +9,7 @@ public class Interpreter {
         Parser parser_instance;
 
         // Object initialization
-        filename = "program1.txt";
+        filename = "program2.txt";
         path = "src/Input/";
         parser_instance = new Parser(path+filename);
 
