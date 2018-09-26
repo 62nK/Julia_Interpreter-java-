@@ -10,6 +10,7 @@ public class Node_Program {
     private String function_id;
     private String block;
     private String end;
+    private Node_Block node_block;
 
     // Variables
     private boolean syntax_error;
@@ -31,6 +32,7 @@ public class Node_Program {
         // Syntax check
         syntax_error = function_error() || function_id_error() || end_error();
 
+        // Expansion
         if(!block.isEmpty())
             expand(block);
     }
@@ -62,7 +64,7 @@ public class Node_Program {
 
     // Create children
     private void expand(String block){
-        // create new node
+        node_block = new Node_Block(block);
     }
 
     // Output
@@ -72,6 +74,8 @@ public class Node_Program {
         System.out.printf("\tfunction id: \'%s\'\n", function_id);
         System.out.printf("\tblock: \'%s\'\n", block);
         System.out.printf("\tend: \'%s\'\n", end);
+
+        node_block.display_node();
     }
     public void display_error(){
         if(!syntax_error())
