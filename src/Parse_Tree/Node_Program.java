@@ -40,7 +40,7 @@ public class Node_Program {
     // Methods
 
     // Syntax check
-    public boolean syntax_error(){
+    private boolean syntax_error(){
         return syntax_error;
     }
     private boolean function_error(){
@@ -63,8 +63,8 @@ public class Node_Program {
     }
 
     // Create children
-    private void expand(String block){
-        node_block = new Node_Block(block);
+    private void expand(String expansion){
+        node_block = new Node_Block(expansion);
     }
 
     // Output
@@ -75,9 +75,11 @@ public class Node_Program {
         System.out.printf("\tblock: \'%s\'\n", block);
         System.out.printf("\tend: \'%s\'\n", end);
 
-        node_block.display_node();
+        display_error();
+        if(!syntax_error)
+            node_block.display_node();
     }
-    public void display_error(){
+    private void display_error(){
         if(!syntax_error())
             System.out.println("No errors found in Program Node");
         else {
