@@ -11,6 +11,7 @@ public class Node_Assignment_Statement {
     private String child_id;
     private String child_assignment_operator;
     private String child_arithmetic_expression;
+    private boolean syntax_error;
 
     // Constructors
     public Node_Assignment_Statement(){}
@@ -31,8 +32,26 @@ public class Node_Assignment_Statement {
         expand();
     }
 
+    private boolean syntax_error(){
+        return syntax_error;
+    }
+
     // Create children
-    public void expand(){
+    private void expand(){
 
     }
+
+    // Output
+    public void display_node(){
+
+    }
+    private void display_error(){
+        if(!syntax_error());
+
+        else {
+
+        }
+    }
+
+
 }

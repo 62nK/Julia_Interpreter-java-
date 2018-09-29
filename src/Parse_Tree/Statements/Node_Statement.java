@@ -6,15 +6,16 @@ public class Node_Statement {
     private String statement;
 
     // Children
+    private Node_Assignment_Statement child_node_assignment_statement;
+
+    // Variables
+    private String child_type;
+    private boolean syntax_error;
     private String if_statement;
     private String assignment_statement;
     private String while_statement;
     private String print_statement;
     private String for_statement;
-
-    // Variables
-    private String child_type;
-    private boolean syntax_error;
 
     public Node_Statement(){}
     public Node_Statement(String statement){
@@ -73,6 +74,7 @@ public class Node_Statement {
             case "print":
                 break;
             case "assign":
+                child_node_assignment_statement = new Node_Assignment_Statement(assignment_statement);
                 break;
             default:
                 break;
