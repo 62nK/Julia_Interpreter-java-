@@ -6,14 +6,14 @@ public class Node_Program {
     private String program;
 
     // Children
+    private Node_Block child_node_block;
+
+    // Variables
+    private boolean syntax_error;
     private String function;
     private String function_id;
     private String block;
     private String end;
-    private Node_Block node_block;
-
-    // Variables
-    private boolean syntax_error;
 
     // Constructors
     public Node_Program(){ }
@@ -64,7 +64,7 @@ public class Node_Program {
 
     // Create children
     private void expand(String expansion){
-        node_block = new Node_Block(expansion);
+        child_node_block = new Node_Block(expansion);
     }
 
     // Output
@@ -77,7 +77,7 @@ public class Node_Program {
 
         display_error();
         if(!syntax_error)
-            node_block.display_node();
+            child_node_block.display_node();
     }
     private void display_error(){
         if(!syntax_error())

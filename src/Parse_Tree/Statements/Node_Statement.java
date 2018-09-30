@@ -7,6 +7,10 @@ public class Node_Statement {
 
     // Children
     private Node_Assignment_Statement child_node_assignment_statement;
+    private Node_If_Statement child_node_if_statement;
+    private Node_While_Statement child_node_while_statement;
+    private Node_For_Statement child_node_for_statement;
+    private Node_Print_Statement child_node_print_statement;
 
     // Variables
     private String child_type;

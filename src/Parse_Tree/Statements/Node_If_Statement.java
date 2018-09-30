@@ -1,5 +1,8 @@
 package Parse_Tree.Statements;
 
+import Parse_Tree.Expressions.Node_Boolean_Expression;
+import Parse_Tree.Node_Block;
+
 public class Node_If_Statement {
 
     public class Node_Assignment_Statement {
@@ -8,6 +11,8 @@ public class Node_If_Statement {
         private String if_statement;
 
         // Children
+        private Node_Boolean_Expression child_node_boolean_expression;
+        private Node_Block child_node_block1, child_node_block2;
 
         // Variables
         private String child_if;
