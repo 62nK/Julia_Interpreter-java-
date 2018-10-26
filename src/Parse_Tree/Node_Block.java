@@ -18,6 +18,8 @@ public class Node_Block {
 
     public Node_Block(){}
     public Node_Block(String parent_block){
+        syntax_error = false;
+
         // Store block string
         this.parent_block = parent_block.trim();
 
@@ -25,25 +27,31 @@ public class Node_Block {
         if(this.parent_block.contains("\n")) {
             child_statement = this.parent_block.substring(0, this.parent_block.indexOf("\n")).trim();
             child_block = this.parent_block.substring(this.parent_block.indexOf("\n")+1).trim();
+            syntax_error();
         }
         else {
-            child_statement = parent_block;
-            child_node_block = null;
+            child_statement = this.parent_block;
         }
-        expand();
+
+        if(child_statement!=null && !syntax_error)
+            expand();
     }
 
     // Methods
 
     // Syntax check
     private boolean syntax_error(){
+        syntax_error = statement_error() || block_error();
         return syntax_error;
     }
-    private boolean statement_error(){return false;}
+    private boolean statement_error(){
+        return false;
+    }
+    private boolean block_error(){ return false; }
 
     // Create children
     private void expand(){
-        if(child_block !=null)
+        if(child_block != null)
             child_node_block = new Node_Block(child_block);
         child_node_statement = new Node_Statement(child_statement);
     }

@@ -42,4 +42,3 @@ div_operator → /
 mod_operator → %
 rev_div_operator → \
 exp_operator → ^
-

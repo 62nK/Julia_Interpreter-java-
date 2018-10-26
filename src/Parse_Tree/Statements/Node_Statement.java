@@ -70,12 +70,16 @@ public class Node_Statement {
         else
         switch (child_type){
             case "if":
+                child_node_if_statement = new Node_If_Statement(if_statement);
                 break;
             case "while":
+                child_node_while_statement = new Node_While_Statement(while_statement);
                 break;
             case "for":
+                child_node_for_statement = new Node_For_Statement(for_statement);
                 break;
             case "print":
+                child_node_print_statement = new Node_Print_Statement(print_statement);
                 break;
             case "assign":
                 child_node_assignment_statement = new Node_Assignment_Statement(assignment_statement);

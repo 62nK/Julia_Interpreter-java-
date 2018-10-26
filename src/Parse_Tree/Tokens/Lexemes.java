@@ -1,4 +1,4 @@
-package Parse_Tree;
+package Parse_Tree.Tokens;
 
 /*
 *
@@ -24,15 +24,17 @@ exp_operator → ^
 *
 * */
 
-public interface Lexical_Analyzer {
+public interface Lexemes {
 
     String assignment_operator = "=";
+
     String le_operator = "<=";
     String lt_operator = "<";
     String ge_operator = ">=";
     String gt_operator = ">";
-    String eq_operator = "= =";
+    String eq_operator = "==";
     String ne_operator = "!=";
+
     String add_operator = "+";
     String sub_operator = "-";
     String mul_operator = "*";

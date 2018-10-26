@@ -1,5 +1,7 @@
 package Parse_Tree;
 
+import Parse_Tree.Tokens.Lexical_Analyzer;
+
 public class Node_Program {
 
     // Parent
@@ -18,29 +20,34 @@ public class Node_Program {
     // Constructors
     public Node_Program(){ }
     public Node_Program(String program){
+        syntax_error = false;
+
         // Store program string
         this.program = program.trim();
         String function_statement;
 
         // Identify children
         function_statement = this.program.substring(0, this.program.indexOf("\n")).trim();
-        function = function_statement.substring(0, function_statement.indexOf(" ")).trim();
-        function_id = function_statement.substring(program.indexOf(" ")).trim();
-        block = this.program.substring(this.program.indexOf("\n"), Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n"))).trim();
-        end = this.program.substring(Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n") )+1).trim();
-
-        // Syntax check
-        syntax_error = function_error() || function_id_error() || end_error();
+        if(this.program.contains("(") && this.program.contains(")") && this.program.indexOf("(")<this.program.indexOf(")")) {
+            function = function_statement.substring(0, function_statement.indexOf(" ")).trim();
+            function_id = function_statement.substring(function_statement.indexOf(" "), function_statement.indexOf("(")).trim();
+            block = this.program.substring(this.program.indexOf("\n"), Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n"))).trim();
+            end = this.program.substring(Math.max(this.program.lastIndexOf(" "), this.program.lastIndexOf("\n")) + 1).trim();
+            syntax_error();
+        }
+        else
+            syntax_error = true;
 
         // Expansion
-        if(!block.isEmpty())
-            expand(block);
+        if(!syntax_error)
+            expand();
     }
 
     // Methods
 
     // Syntax check
     private boolean syntax_error(){
+        syntax_error = function_error() || function_id_error() || end_error();
         return syntax_error;
     }
     private boolean function_error(){
@@ -50,21 +57,22 @@ public class Node_Program {
             return true;
     }
     private boolean function_id_error(){
-        if(true)
+        Lexical_Analyzer lexical_analyzer = new Lexical_Analyzer(function_id);
+        if(lexical_analyzer.get_type().equals("id"))
             return false;
         else
             return true;
     }
     private boolean end_error(){
-        if(true)
+        if(end.equals("end"))
             return false;
         else
             return true;
     }
 
     // Create children
-    private void expand(String expansion){
-        child_node_block = new Node_Block(expansion);
+    private void expand(){
+        child_node_block = new Node_Block(block);
     }
 
     // Output
