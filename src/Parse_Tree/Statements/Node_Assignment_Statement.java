@@ -28,8 +28,8 @@ public class Node_Assignment_Statement {
         // identify children
         if(this.assign_statement.contains(Lexemes.assignment_operator)) {
             child_id = this.assign_statement.substring(0, this.assign_statement.indexOf("=")).trim();
-            child_arithmetic_expression = "=";
-            child_assignment_operator = this.assign_statement.substring(this.assign_statement.indexOf("=")+1).trim();
+            child_assignment_operator = "=";
+            child_arithmetic_expression = this.assign_statement.substring(this.assign_statement.indexOf("=")+1).trim();
         }
         else
             syntax_error = true;
@@ -39,7 +39,6 @@ public class Node_Assignment_Statement {
         if(!syntax_error)
             expand();
     }
-
 
     // Methods
 
@@ -67,8 +66,21 @@ public class Node_Assignment_Statement {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Assign Statement node, children:\n", level);
+        System.out.printf("\tid: \'%s\'\n", child_id);
+        System.out.printf("\tassignment_operator: \'%s\'\n", child_assignment_operator);
+        System.out.printf("\tarithmetic expression: \'%s\'\n", child_arithmetic_expression);
 
+        // Children
+        if(!syntax_error) {
+            child_node_arithmetic_expression.display_node(level);
+        }
     }
     private void display_error(){
         if(!syntax_error());

@@ -57,16 +57,21 @@ public class Node_Block {
     }
     
     // Output
-    public void display_node(){
-        System.out.println("Block node, children:");
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Block node, children:\n", level);
         System.out.printf("\tstatement: \'%s\'\n", child_statement);
         if(child_block != null)
             System.out.printf("\tblock: \'%s\'\n", child_block);
 
-        display_error();
-        child_node_statement.display_node();
+        // Children
+        child_node_statement.display_node(level);
         if(child_node_block != null && !syntax_error)
-            child_node_block.display_node();
+            child_node_block.display_node(level);
     }
     private void display_error(){
         if(!syntax_error())

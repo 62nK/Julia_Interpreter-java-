@@ -65,8 +65,22 @@ public class Node_Boolean_Expression {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Boolean Expression node, child:\n", level);
+        System.out.printf("\trelative operator: \'%s\'\n", child_relative_op);
+        System.out.printf("\tarithmetic expression1: \'%s\'\n", child_arithmetic_expression1);
+        System.out.printf("\tarithmetic expression2: \'%s\'\n", child_arithmetic_expression2);
 
+        // Children
+        if(!syntax_error) {
+            child_node_arithmetic_expression1.display_node(level);
+            child_node_arithmetic_expression2.display_node(level);
+        }
     }
     private void display_error(){
         if(!syntax_error());

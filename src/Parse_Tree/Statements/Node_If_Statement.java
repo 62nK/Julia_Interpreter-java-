@@ -75,8 +75,25 @@ public class Node_If_Statement {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d If Statement node, children:\n", level);
+        System.out.printf("\tfunction: \'%s\'\n", child_if);
+        System.out.printf("\tboolean expression: \'%s\'\n", child_boolean_expression);
+        System.out.printf("\tblock1: \'%s\'\n", child_block1);
+        System.out.printf("\tblock2: \'%s\'\n", child_block2);
+        System.out.printf("\tterminal: \'%s\'\n", child_end);
 
+        // Children
+        if(!syntax_error) {
+            child_node_boolean_expression.display_node(level);
+            child_node_block1.display_node(level);
+            child_node_block2.display_node(level);
+        }
     }
     private void display_error(){
         if(!syntax_error());

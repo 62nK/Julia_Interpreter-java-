@@ -13,7 +13,6 @@ public class Node_Iter {
 
     // Variables
     private String child_arithmetic_expression1;
-    private String child_arithmetic_op;
     private String child_arithmetic_expression2;
     private boolean syntax_error;
 
@@ -25,7 +24,6 @@ public class Node_Iter {
         // identify children
         if(this.iter.contains(":")){
             child_arithmetic_expression1 = this.iter.substring(0, this.iter.indexOf(":")).trim();
-            child_arithmetic_op = "add_operator";
             child_arithmetic_expression2 = this.iter.substring(this.iter.indexOf(":") + 1).trim();
             syntax_error();
         }
@@ -48,7 +46,22 @@ public class Node_Iter {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d For Statement node, children:\n", level);
+        System.out.printf("\tarithmetic expression: \'%s\'\n", child_arithmetic_expression1);
+        System.out.printf("\titer operator: \'%s\'\n", ":");
+        System.out.printf("\tarithmetic expression: \'%s\'\n", child_arithmetic_expression2);
+
+        // Children
+        if(!syntax_error) {
+            child_node_arithmetic_expression1.display_node(level);
+            child_node_arithmetic_expression2.display_node(level);
+        }
 
     }
     private void display_error(){

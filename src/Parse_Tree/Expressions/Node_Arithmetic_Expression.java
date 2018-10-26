@@ -67,8 +67,25 @@ public class Node_Arithmetic_Expression {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Arithmetic Expression node, child:\n", level);
+        if(child_id!=null)
+            System.out.printf("\tid: \'%s\'\n", child_id);
+        if(child_literal_integer!=null)
+            System.out.printf("\tliteral integer: \'%s\'\n", child_literal_integer);
+        if(child_binary_expression!=null)
+            System.out.printf("\tbinary expression: \'%s\'\n", child_binary_expression);
 
+        // Children
+        if(!syntax_error) {
+            if(child_node_binary_expression!=null)
+                child_node_binary_expression.display_node(level);
+        }
     }
     private void display_error(){
         if(!syntax_error());

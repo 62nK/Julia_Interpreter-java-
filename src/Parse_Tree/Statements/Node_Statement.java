@@ -33,17 +33,17 @@ public class Node_Statement {
             child_type = "if";
             expand(if_statement);
         }
-        else if(this.statement.contains(" while ") && this.statement.contains(" end ")){
+        else if(this.statement.contains("while ") && this.statement.contains(" end ")){
             while_statement = this.statement;
             child_type = "while";
             expand(while_statement);
         }
-        else if(this.statement.contains(" for ") && this.statement.contains(" end ")){
+        else if(this.statement.contains("for ") && this.statement.contains(" end ")){
             for_statement = this.statement;
             child_type = "for";
             expand(for_statement);
         }
-        else if(this.statement.contains(" print ")){
+        else if(this.statement.contains("print")){
             print_statement = this.statement;
             child_type = "print";
             expand(print_statement);
@@ -92,41 +92,53 @@ public class Node_Statement {
     }
 
     // Output
-    public void display_node(){
-        if(child_type == null)
-            display_error();
-        else
-        switch (child_type){
-            case "if":
-                System.out.println("If Statement node, child:");
-                System.out.printf("\tstatement: \'%s\'\n", if_statement);
-                break;
-            case "while":
-                System.out.println("While Statement node, child:");
-                System.out.printf("\tstatement: \'%s\'\n", while_statement);
-                break;
-            case "for":
-                System.out.println("For Statement node, child:");
-                System.out.printf("\tstatement: \'%s\'\n", for_statement);
-                break;
-            case "print":
-                System.out.println("Print Statement node, child:");
-                System.out.printf("\tstatement: \'%s\'\n", print_statement);
-                break;
-            case "assign":
-                System.out.println("Assign Statement node, child:");
-                System.out.printf("\tstatement: \'%s\'\n", assignment_statement);
-                break;
-            default:
-                display_error();
-                break;
+    public void display_node(int level){
+        if(!syntax_error) {
+            level++;
+            for (int i = 0; i < level; i++)
+                System.out.print("- ");
+            // Pre-order traversal
+            System.out.printf("Level %d ", level);
+            switch (child_type) {
+                case "if":
+                    // Parent
+                    System.out.println("Statement node, child:");
+                    System.out.printf("\t If Statement: \'%s\'\n", if_statement);
+                    // Child
+                    child_node_if_statement.display_node(level);
+                    break;
+                case "while":
+                    // Parent
+                    System.out.println("Statement node, child:");
+                    System.out.printf("\tWhile Statement: \'%s\'\n", while_statement);
+                    // Child
+                    child_node_while_statement.display_node(level);
+                    break;
+                case "for":
+                    // Parent
+                    System.out.println("Statement node, child:");
+                    System.out.printf("\tFor Statement: \'%s\'\n", for_statement);
+                    // Child
+                    child_node_for_statement.display_node(level);
+                    break;
+                case "print":
+                    // Parent
+                    System.out.println("Statement node, child:");
+                    System.out.printf("\tPrint Statement: \'%s\'\n", print_statement);
+                    // Child
+                    child_node_print_statement.display_node(level);
+                    break;
+                case "assign":
+                    // Parent
+                    System.out.println("Statement node, child:");
+                    System.out.printf("\tAssign statement: \'%s\'\n", assignment_statement);
+                    // Child
+                    child_node_assignment_statement.display_node(level);
+                    break;
+                default:
+                    break;
+            }
         }
-
-
-
-
-        display_error();
-
     }
     private void display_error(){
         if(!syntax_error())

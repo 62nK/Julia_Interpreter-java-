@@ -77,15 +77,18 @@ public class Node_Program {
 
     // Output
     public void display_node(){
-        System.out.println("Program node, children:");
+        int level = 0;
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Program node, children:\n", level);
         System.out.printf("\tfunction: \'%s\'\n", function);
         System.out.printf("\tfunction id: \'%s\'\n", function_id);
         System.out.printf("\tblock: \'%s\'\n", block);
-        System.out.printf("\tend: \'%s\'\n", end);
+        System.out.printf("\tterminal: \'%s\'\n", end);
 
-        display_error();
+        // Children
         if(!syntax_error)
-            child_node_block.display_node();
+            child_node_block.display_node(level);
     }
     private void display_error(){
         if(!syntax_error())

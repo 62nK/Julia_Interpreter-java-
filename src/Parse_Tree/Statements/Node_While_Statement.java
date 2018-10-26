@@ -66,7 +66,7 @@ public class Node_While_Statement {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
 
     }
     private void display_error(){

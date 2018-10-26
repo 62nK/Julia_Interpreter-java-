@@ -68,8 +68,22 @@ public class Node_Binary_Expression {
     }
 
     // Output
-    public void display_node(){
+    public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d Binary Expression node, child:\n", level);
+        System.out.printf("\tassignment operator: \'%s\'\n", child_arithmetic_op);
+        System.out.printf("\tarithmetic expression1: \'%s\'\n", child_arithmetic_expression1);
+        System.out.printf("\tarithmetic expression2: \'%s\'\n", child_arithmetic_expression2);
 
+        // Children
+        if(!syntax_error) {
+            child_node_arithmetic_expression1.display_node(level);
+            child_node_arithmetic_expression2.display_node(level);
+        }
     }
     private void display_error(){
         if(!syntax_error());
