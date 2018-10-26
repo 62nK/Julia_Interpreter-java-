@@ -23,6 +23,7 @@ public class Node_Statement {
 
     public Node_Statement(){}
     public Node_Statement(String statement){
+        syntax_error = false;
         // Store block string
         this.statement = statement.trim();
 
@@ -52,7 +53,8 @@ public class Node_Statement {
             child_type = "assign";
             expand(assignment_statement);
         }
-        expand(null);
+        else
+            syntax_error=true;
     }
 
     // Methods

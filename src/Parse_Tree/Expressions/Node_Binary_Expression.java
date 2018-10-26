@@ -18,6 +18,7 @@ public class Node_Binary_Expression {
 
     public Node_Binary_Expression(){}
     public Node_Binary_Expression(String binary_expression){
+        syntax_error=false;
         this.binary_expression = binary_expression;
         // identify children
         if(this.binary_expression.contains(Lexemes.add_operator)) {
@@ -49,8 +50,11 @@ public class Node_Binary_Expression {
             child_arithmetic_op = "exp_operator";
             child_arithmetic_expression2 = this.binary_expression.substring(this.binary_expression.indexOf(Lexemes.exp_operator) + 1).trim();
         }
+        else
+            syntax_error=true;
 
-        expand();
+        if (!syntax_error)
+            expand();
     }
 
     private boolean syntax_error(){
@@ -59,7 +63,8 @@ public class Node_Binary_Expression {
 
     // Create children
     private void expand(){
-
+        child_node_arithmetic_expression1 = new Node_Arithmetic_Expression(child_arithmetic_expression1);
+        child_node_arithmetic_expression2 = new Node_Arithmetic_Expression(child_arithmetic_expression2);
     }
 
     // Output

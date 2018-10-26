@@ -19,6 +19,7 @@ public class Node_Boolean_Expression {
     // Constructors
     public Node_Boolean_Expression(){}
     public Node_Boolean_Expression(String boolean_expression){
+        syntax_error=false;
         // Store block string
         this.boolean_expression = boolean_expression.trim();
 
@@ -47,8 +48,10 @@ public class Node_Boolean_Expression {
             child_arithmetic_expression1 = this.boolean_expression.substring(0, this.boolean_expression.indexOf(Lexemes.eq_operator)).trim();
             child_relative_op = "eq_operator";
             child_arithmetic_expression1 = this.boolean_expression.substring(this.boolean_expression.indexOf(Lexemes.eq_operator)+Lexemes.eq_operator.length()+1).trim();
-        }
-        expand();
+        }else
+            syntax_error=true;
+        if(!syntax_error)
+            expand();
     }
 
     private boolean syntax_error(){
@@ -57,7 +60,8 @@ public class Node_Boolean_Expression {
 
     // Create children
     private void expand(){
-
+        child_node_arithmetic_expression1 = new Node_Arithmetic_Expression(child_arithmetic_expression1);
+        child_node_arithmetic_expression2 = new Node_Arithmetic_Expression(child_arithmetic_expression2);
     }
 
     // Output

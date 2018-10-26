@@ -22,6 +22,7 @@ public class Node_While_Statement {
     // Constructors
     public Node_While_Statement(){}
     public Node_While_Statement(String while_statement){
+        syntax_error=false;
         this.while_statement = while_statement.trim();
 
         // identify children
@@ -30,20 +31,38 @@ public class Node_While_Statement {
             child_boolean_expression = this.while_statement.substring(this.while_statement.indexOf(" "), this.while_statement.indexOf("\n")).trim();
             child_block = this.while_statement.substring(this.while_statement.indexOf("\n")+1, Math.max(this.while_statement.lastIndexOf(" "), this.while_statement.lastIndexOf("\n"))).trim();
             child_end = this.while_statement.substring(Math.max(this.while_statement.lastIndexOf(" "), this.while_statement.lastIndexOf("\n"))).trim();
+            syntax_error();
         }
-        else {
+        else
+            syntax_error=true;
 
-        }
-        expand();
+        if(!syntax_error)
+            expand();
     }
 
     private boolean syntax_error(){
+        syntax_error = while_error() || boolean_expression_error() || block_error() || end_error();
         return syntax_error;
+    }
+    private boolean while_error(){
+        if(!child_while.equals("while"))
+            return true;
+        return false;
+    }
+    private boolean boolean_expression_error(){
+        return false;
+    }
+    private boolean block_error(){ return false; }
+    private boolean end_error(){
+        if(!child_end.equals("end"))
+            return true;
+        return false;
     }
 
     // Create children
     private void expand(){
-
+        child_node_boolean_expression = new Node_Boolean_Expression(child_boolean_expression);
+        child_node_block = new Node_Block(child_block);
     }
 
     // Output
