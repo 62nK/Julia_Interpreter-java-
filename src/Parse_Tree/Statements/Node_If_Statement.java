@@ -95,6 +95,28 @@ public class Node_If_Statement {
             child_node_block2.display_node(level);
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" If Statement node, children:\n");
+        stringBuilder.append("\tfunction: \'"+child_if+"\'\n");
+        stringBuilder.append("\tboolean expression: \'"+child_boolean_expression+"\'\n");
+        stringBuilder.append("\tblock1: \'"+child_block1+"\'\n");
+        stringBuilder.append("\tblock2: \'"+child_block2+"\'\n");
+        stringBuilder.append("\tterminal: \'"+child_end+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_boolean_expression.get_node(level));
+            stringBuilder.append(child_node_block1.get_node(level));
+            stringBuilder.append(child_node_block2.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 

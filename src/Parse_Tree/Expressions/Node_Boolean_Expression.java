@@ -82,6 +82,25 @@ public class Node_Boolean_Expression {
             child_node_arithmetic_expression2.display_node(level);
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" Boolean Expression node, child:\n");
+        stringBuilder.append("\trelative operator: \'"+child_relative_op+"\'\n");
+        stringBuilder.append("\tarithmetic expression1: \'"+child_arithmetic_expression1+"\'\n");
+        stringBuilder.append("\tarithmetic expression2: \'"+child_arithmetic_expression2+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_arithmetic_expression1.get_node(level));
+            stringBuilder.append(child_node_arithmetic_expression2.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 

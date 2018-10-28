@@ -18,7 +18,11 @@ public class Interpreter {
 
         parser_instance.parse();
         parser_instance.build_parse_tree();
-        parser_instance.print_parsed_program();
+
+        // Display Parse Tree in Standard Output
+        //parser_instance.print_parsed_program();
+
+        // Print Parse Tree to file
         parser_instance.print_parsed_program_to_file(output_path+filename+extension);
     }
 }

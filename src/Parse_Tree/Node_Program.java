@@ -90,6 +90,22 @@ public class Node_Program {
         if(!syntax_error)
             child_node_block.display_node(level);
     }
+    public String get_node(){
+        StringBuilder strBuilder = new StringBuilder();
+        int level = 0;
+        // Pre-order traversal
+        // Parent
+        strBuilder.append("Level "+level+" Program node, children:\n");
+        strBuilder.append("\tfunction: \'"+function+"\'\n");
+        strBuilder.append("\tfunction id: \'"+function_id+"\'\n");
+        strBuilder.append("\tblock: \'"+block+"\'\n");
+        strBuilder.append("\tterminal: \'"+end+"\'\n");
+
+        // Children
+        if(!syntax_error)
+            strBuilder.append(child_node_block.get_node(level));
+        return strBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error())
             System.out.println("No errors found in Program Node");

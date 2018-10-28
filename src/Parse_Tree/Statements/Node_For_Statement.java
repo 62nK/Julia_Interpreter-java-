@@ -97,6 +97,28 @@ public class Node_For_Statement {
             child_node_block.display_node(level);
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+           stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" For Statement node, children:\n");
+        stringBuilder.append("\tloop function: \'"+child_for+"\'\n");
+        stringBuilder.append("\tid: \'"+child_id+"\'\n");
+        stringBuilder.append("\tassignment operator: \'"+child_equal+"\'\n");
+        stringBuilder.append("\titer: \'"+child_iter+"\'\n");
+        stringBuilder.append("\tblock: \'"+child_block+"\'\n");
+        stringBuilder.append("\tterminal: \'"+child_end+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_iter.get_node(level));
+            stringBuilder.append(child_node_block.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 

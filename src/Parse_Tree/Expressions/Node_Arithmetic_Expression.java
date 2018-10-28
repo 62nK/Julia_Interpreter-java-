@@ -87,6 +87,28 @@ public class Node_Arithmetic_Expression {
                 child_node_binary_expression.display_node(level);
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" Arithmetic Expression node, child:\n");
+        if(child_id!=null)
+            stringBuilder.append("\tid: \'"+child_id+"\'\n");
+        if(child_literal_integer!=null)
+            stringBuilder.append("\tliteral integer: \'"+child_literal_integer+"\'\n");
+        if(child_binary_expression!=null)
+            stringBuilder.append("\tbinary expression: \'"+child_binary_expression+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            if(child_node_binary_expression!=null)
+                stringBuilder.append(child_node_binary_expression.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 

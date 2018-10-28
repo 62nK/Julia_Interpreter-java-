@@ -67,7 +67,42 @@ public class Node_While_Statement {
 
     // Output
     public void display_node(int level){
+        level++;
+        for(int i=0; i<level; i++)
+            System.out.print("- ");
+        // Pre-order traversal
+        // Parent
+        System.out.printf("Level %d While Statement node, children:\n", level);
+        System.out.printf("\tfunction: \'%s\'\n", child_while);
+        System.out.printf("\tboolean expression: \'%s\'\n", child_boolean_expression);
+        System.out.printf("\tblock: \'%s\'\n", child_block);
+        System.out.printf("\tterminal: \'%s\'\n", child_end);
 
+        // Children
+        if(!syntax_error) {
+            child_node_boolean_expression.display_node(level);
+            child_node_block.display_node(level);
+        }
+    }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" While Statement node, children:\n");
+        stringBuilder.append("\tfunction: \'"+child_while+"\'\n");
+        stringBuilder.append("\tboolean expression: \'+child_boolean_expression+\'\n");
+        stringBuilder.append("\tblock: \'"+child_block+"\'\n");
+        stringBuilder.append("\tterminal: \'"+child_end+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_boolean_expression.get_node(level));
+            stringBuilder.append(child_node_block.get_node(level));
+        }
+        return stringBuilder.toString();
     }
     private void display_error(){
         if(!syntax_error());

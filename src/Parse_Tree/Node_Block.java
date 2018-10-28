@@ -73,6 +73,25 @@ public class Node_Block {
         if(child_node_block != null && !syntax_error)
             child_node_block.display_node(level);
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" Block node, children:\n");
+        stringBuilder.append("\tstatement: \'"+child_statement+"\'\n");
+        if(child_block != null)
+            stringBuilder.append("\tblock: \'"+child_block+"\'\n");
+
+        // Children
+        stringBuilder.append(child_node_statement.get_node(level));
+        if(child_node_block != null && !syntax_error)
+            stringBuilder.append(child_node_block.get_node(level));
+        return stringBuilder.toString();
+    }
+
     private void display_error(){
         if(!syntax_error())
             System.out.println("No errors found in Program Node");

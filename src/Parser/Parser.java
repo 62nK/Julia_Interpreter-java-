@@ -10,17 +10,17 @@ public class Parser {
 
     // Objects
     private Node_Program program_node;
-    private String filename;
+    private String inputFile;
     private String program;
 
     // Constructor
-    public Parser(String filename){
-        this.filename = filename;
+    public Parser(String inputFile){
+        this.inputFile = inputFile;
     }
 
     // Methods
     public void parse(){
-        try{ program = new String(Files.readAllBytes(Paths.get(filename)));}
+        try{ program = new String(Files.readAllBytes(Paths.get(inputFile)));}
         catch (IOException e){ System.out.println(e.toString()); }
     }
     public void build_parse_tree(){
@@ -28,7 +28,7 @@ public class Parser {
     }
     public void print_parsed_program(){
         System.out.println("#######################");
-        System.out.printf("The program \"%s\" parsed is:\n", filename);
+        System.out.printf("The program \"%s\" parsed is:\n", inputFile);
         System.out.println(program);
         System.out.println("#######################");
         program_node.display_node();
@@ -36,14 +36,14 @@ public class Parser {
     }
     public void print_parsed_program_to_file(String output_file){
         String output_string = "#######################\n" +
-                "The program \""+ filename +"\" parsed is:\n" +
+                "The program \""+ inputFile +"\" parsed is:\n" +
                 program + "#######################\n" +
-                // stringfy the tree here
+                program_node.get_node()+
                 "*#*#End of the Parse Tree#*#*";
         try (PrintWriter out = new PrintWriter(output_file)) {
             out.println(output_string);
+            System.out.printf("Parse Tree in file: %s", output_file);
         } catch (IOException e){ System.out.println(e.toString()); }
-
     }
     public void print_errors(){}
 }

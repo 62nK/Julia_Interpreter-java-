@@ -64,6 +64,25 @@ public class Node_Iter {
         }
 
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" For Statement node, children:\n");
+        stringBuilder.append("\tarithmetic expression: \'"+child_arithmetic_expression1+"\'\n");
+        stringBuilder.append("\titer operator: \'"+":"+"\'\n");
+        stringBuilder.append("\tarithmetic expression: \'"+child_arithmetic_expression2+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_arithmetic_expression1.get_node(level));
+            stringBuilder.append(child_node_arithmetic_expression2.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 

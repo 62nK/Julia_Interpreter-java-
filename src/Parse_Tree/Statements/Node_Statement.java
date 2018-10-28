@@ -140,6 +140,56 @@ public class Node_Statement {
             }
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        if(!syntax_error) {
+            level++;
+            for (int i = 0; i < level; i++)
+                stringBuilder.append("- ");
+            // Pre-order traversal
+            stringBuilder.append(("Level "+level+" "));
+            switch (child_type) {
+                case "if":
+                    // Parent
+                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("\t If Statement: \'"+if_statement+"\'\n");
+                    // Child
+                    stringBuilder.append(child_node_if_statement.get_node(level));
+                    break;
+                case "while":
+                    // Parent
+                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("\tWhile Statement: \'"+while_statement+"\'\n");
+                    // Child
+                    stringBuilder.append(child_node_while_statement.get_node(level));
+                    break;
+                case "for":
+                    // Parent
+                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("\tFor Statement: \'"+for_statement+"\'\n");
+                    // Child
+                    stringBuilder.append(child_node_for_statement.get_node(level));
+                    break;
+                case "print":
+                    // Parent
+                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("\tPrint Statement: \'"+print_statement+"\'\n");
+                    // Child
+                    stringBuilder.append(child_node_print_statement.get_node(level));
+                    break;
+                case "assign":
+                    // Parent
+                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("\tAssign statement: \'"+assignment_statement+"\'\n");
+                    // Child
+                    stringBuilder.append(child_node_assignment_statement.get_node(level));
+                    break;
+                default:
+                    break;
+            }
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error())
             System.out.println("No errors found in Program Node");

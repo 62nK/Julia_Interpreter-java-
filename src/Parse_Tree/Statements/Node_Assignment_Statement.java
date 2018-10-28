@@ -82,6 +82,24 @@ public class Node_Assignment_Statement {
             child_node_arithmetic_expression.display_node(level);
         }
     }
+    public String get_node(int level){
+        StringBuilder stringBuilder = new StringBuilder();
+        level++;
+        for(int i=0; i<level; i++)
+            stringBuilder.append("- ");
+        // Pre-order traversal
+        // Parent
+        stringBuilder.append("Level "+level+" Assign Statement node, children:\n");
+        stringBuilder.append("\tid: \'"+child_id+"\'\n");
+        stringBuilder.append("\tassignment_operator: \'"+child_assignment_operator+"\'\n");
+        stringBuilder.append("\tarithmetic expression: \'"+child_arithmetic_expression+"\'\n");
+
+        // Children
+        if(!syntax_error) {
+            stringBuilder.append(child_node_arithmetic_expression.get_node(level));
+        }
+        return stringBuilder.toString();
+    }
     private void display_error(){
         if(!syntax_error());
 
