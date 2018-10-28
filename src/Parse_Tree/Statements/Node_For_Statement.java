@@ -119,11 +119,29 @@ public class Node_For_Statement {
         }
         return stringBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error());
-
-        else {
-
+    public boolean display_error(){
+        if(syntax_error){
+            System.out.println("Error in For Statement");
+            if(for_error()) {
+                System.out.printf("\tfor function: \'%s\' where it\'s supposed to be \'for'\n", child_for);
+                return true;
+            }
+            if(id_error()){
+                System.out.printf("\terror on id: \'%s\'\n", child_id);
+                return true;
+            }
+            if(end_error()){
+                System.out.printf("\tterminal: \'%s\' where it\'s supposed to be \'end'\n", child_end);
+                return true;
+            }
+            return true;
         }
+        else {
+            if(child_node_iter.display_error())
+                return true;
+            if(child_node_block.display_error())
+                return true;
+        }
+        return false;
     }
 }

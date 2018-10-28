@@ -104,12 +104,17 @@ public class Node_Binary_Expression {
         }
         return stringBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error());
-
-        else {
-
+    public boolean display_error(){
+        if(syntax_error){
+            System.out.printf("Error Binary Expression: \'%s\'\n", binary_expression);
+            return true;
         }
+        else {
+            if(child_node_arithmetic_expression1.display_error())
+                return true;
+            if(child_node_arithmetic_expression2.display_error())
+                return true;
+        }
+        return false;
     }
-
 }

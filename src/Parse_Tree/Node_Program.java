@@ -106,22 +106,30 @@ public class Node_Program {
             strBuilder.append(child_node_block.get_node(level));
         return strBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error())
-            System.out.println("No errors found in Program Node");
-        else {
-            if(function_error()) {
+    public boolean display_error(){
+        if(syntax_error) {
+            if (function_error()) {
                 System.out.println("Error in function statement");
                 System.out.printf("\tfunction: \'%s\' where it\'s supposed to be \'function'\n", function);
+                return true;
             }
-            if(function_id_error()) {
+            if (function_id_error()) {
                 System.out.println("Error in function id");
                 System.out.printf("\tfunction id: \'%s\'\n", function_id);
+                return true;
             }
-            if(end_error()) {
+            if (end_error()) {
                 System.out.println("Error in end statement");
                 System.out.printf("\tend: \'%s\'\n", end);
+                return true;
             }
+            System.out.println("Error in Program");
+            return true;
         }
+        else
+            if(child_node_block.display_error())
+                return true;
+
+        return false;
     }
 }

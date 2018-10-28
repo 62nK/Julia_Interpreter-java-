@@ -1,4 +1,4 @@
 function a()
     s = b ^ 2 - 4 * a * c
-    print ( r + 2)
+    print (r + 2)
 end

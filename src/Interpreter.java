@@ -10,19 +10,19 @@ public class Interpreter {
         Parser parser_instance;
 
         // Object initialization
-        filename = "program2";
-        extension = ".txt";
-        input_path = "src/Input/";
+        filename = "program2"; // Julia program to parse
+        extension = ".txt"; // extension
+        input_path = "src/Input/";  // directory
         output_path = "src/Output/";
-        parser_instance = new Parser(input_path+filename+extension);
 
+        parser_instance = new Parser(input_path+filename+extension);
         parser_instance.parse();
         parser_instance.build_parse_tree();
 
-        // Display Parse Tree in Standard Output
-        //parser_instance.print_parsed_program();
-
-        // Print Parse Tree to file
-        parser_instance.print_parsed_program_to_file(output_path+filename+extension);
+        if(!parser_instance.errors()) {
+            System.out.printf("No errors found in %s, the parser will attempt to generate the Parse Tree ...\n", filename);
+//            parser_instance.print_parsed_program();   // Display Parse Tree in Standard Output
+            parser_instance.print_parsed_program_to_file(output_path+filename+extension); // Print Parse Tree to file
+        }
     }
 }

@@ -104,11 +104,26 @@ public class Node_While_Statement {
         }
         return stringBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error());
-
-        else {
-
+    public boolean display_error(){
+        if(syntax_error){
+            System.out.println("Error in While Statement");
+            if(while_error()) {
+                System.out.printf("\twhile function: \'%s\' where it\'s supposed to be \'while'\n", child_while);
+                return true;
+            }
+            if(end_error()){
+                System.out.printf("\tterminal: \'%s\' where it\'s supposed to be \'end'\n", child_end);
+                return true;
+            }
+            return true;
         }
+        else {
+            if(child_node_boolean_expression.display_error())
+                return true;
+            if(child_node_block.display_error())
+                return true;
+        }
+        return false;
     }
+
 }

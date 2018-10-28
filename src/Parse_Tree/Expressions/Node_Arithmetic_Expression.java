@@ -109,11 +109,25 @@ public class Node_Arithmetic_Expression {
         }
         return stringBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error());
-
-        else {
-
+    public boolean display_error(){
+        if(syntax_error){
+            System.out.println("Error Arithmetic Expression");
+            if(id_error()){
+                System.out.printf("\terror on id: \'%s\'\n", child_id);
+                return true;
+            }
+            if(literal_integer_error()) {
+                System.out.printf("\terror on literal integer: \'%s\'\n", child_literal_integer);
+                return true;
+            }
+            return true;
         }
+        else {
+            if(child_node_binary_expression!=null)
+                if(child_node_binary_expression.display_error())
+                    return true;
+        }
+        return false;
     }
+
 }

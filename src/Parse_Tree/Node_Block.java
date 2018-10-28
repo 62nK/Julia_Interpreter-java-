@@ -91,15 +91,23 @@ public class Node_Block {
             stringBuilder.append(child_node_block.get_node(level));
         return stringBuilder.toString();
     }
-
-    private void display_error(){
-        if(!syntax_error())
-            System.out.println("No errors found in Program Node");
-        else {
-            if(statement_error()) {
+    public boolean display_error(){
+        if(syntax_error) {
+            if (statement_error()) {
                 System.out.println("Error in statement");
                 System.out.printf("\tstatement: \'%s\' where it\'s supposed to be \'function'\n", child_statement);
+                return true;
             }
+            System.out.println("Error in Block");
+            return true;
         }
+        else{
+            if(child_node_statement.display_error())
+                return true;
+            if(child_node_block!=null)
+                if(child_node_block.display_error())
+                    return true;
+        }
+        return false;
     }
 }

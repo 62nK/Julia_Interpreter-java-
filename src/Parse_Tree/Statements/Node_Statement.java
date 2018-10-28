@@ -28,17 +28,17 @@ public class Node_Statement {
         this.statement = statement.trim();
 
         // identify children
-        if(this.statement.contains("if ")) {
+        if(this.statement.contains("if")) {
             if_statement = this.statement;
             child_type = "if";
             expand(if_statement);
         }
-        else if(this.statement.contains("while ") && this.statement.contains(" end ")){
+        else if(this.statement.contains("while") && this.statement.contains(" end ")){
             while_statement = this.statement;
             child_type = "while";
             expand(while_statement);
         }
-        else if(this.statement.contains("for ") && this.statement.contains(" end ")){
+        else if(this.statement.contains("for") && this.statement.contains(" end ")){
             for_statement = this.statement;
             child_type = "for";
             expand(for_statement);
@@ -102,35 +102,35 @@ public class Node_Statement {
             switch (child_type) {
                 case "if":
                     // Parent
-                    System.out.println("Statement node, child:");
+                    System.out.println("Statement node, child:\n");
                     System.out.printf("\t If Statement: \'%s\'\n", if_statement);
                     // Child
                     child_node_if_statement.display_node(level);
                     break;
                 case "while":
                     // Parent
-                    System.out.println("Statement node, child:");
+                    System.out.println("Statement node, child:\n");
                     System.out.printf("\tWhile Statement: \'%s\'\n", while_statement);
                     // Child
                     child_node_while_statement.display_node(level);
                     break;
                 case "for":
                     // Parent
-                    System.out.println("Statement node, child:");
+                    System.out.println("Statement node, child:\n");
                     System.out.printf("\tFor Statement: \'%s\'\n", for_statement);
                     // Child
                     child_node_for_statement.display_node(level);
                     break;
                 case "print":
                     // Parent
-                    System.out.println("Statement node, child:");
+                    System.out.println("Statement node, child:\n");
                     System.out.printf("\tPrint Statement: \'%s\'\n", print_statement);
                     // Child
                     child_node_print_statement.display_node(level);
                     break;
                 case "assign":
                     // Parent
-                    System.out.println("Statement node, child:");
+                    System.out.println("Statement node, child:\n");
                     System.out.printf("\tAssign statement: \'%s\'\n", assignment_statement);
                     // Child
                     child_node_assignment_statement.display_node(level);
@@ -151,35 +151,35 @@ public class Node_Statement {
             switch (child_type) {
                 case "if":
                     // Parent
-                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("Statement node, child:\n");
                     stringBuilder.append("\t If Statement: \'"+if_statement+"\'\n");
                     // Child
                     stringBuilder.append(child_node_if_statement.get_node(level));
                     break;
                 case "while":
                     // Parent
-                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("Statement node, child:\n");
                     stringBuilder.append("\tWhile Statement: \'"+while_statement+"\'\n");
                     // Child
                     stringBuilder.append(child_node_while_statement.get_node(level));
                     break;
                 case "for":
                     // Parent
-                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("Statement node, child:\n");
                     stringBuilder.append("\tFor Statement: \'"+for_statement+"\'\n");
                     // Child
                     stringBuilder.append(child_node_for_statement.get_node(level));
                     break;
                 case "print":
                     // Parent
-                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("Statement node, child:\n");
                     stringBuilder.append("\tPrint Statement: \'"+print_statement+"\'\n");
                     // Child
                     stringBuilder.append(child_node_print_statement.get_node(level));
                     break;
                 case "assign":
                     // Parent
-                    stringBuilder.append("Statement node, child:");
+                    stringBuilder.append("Statement node, child:\n");
                     stringBuilder.append("\tAssign statement: \'"+assignment_statement+"\'\n");
                     // Child
                     stringBuilder.append(child_node_assignment_statement.get_node(level));
@@ -190,14 +190,36 @@ public class Node_Statement {
         }
         return stringBuilder.toString();
     }
-    private void display_error(){
-        if(!syntax_error())
-            System.out.println("No errors found in Program Node");
-        else {
-            if(statement_error()) {
-                System.out.println("Error in statement");
-                System.out.printf("\tstatement: \'%s\' where it\'s supposed to be \'function'\n", statement);
-            }
+    public boolean display_error(){
+        if(syntax_error){
+            System.out.printf("Error in statement: %s\n", statement);
+            return true;
         }
+        else
+            switch (child_type) {
+                case "if":
+                    if(child_node_if_statement.display_error())
+                        return true;
+                    break;
+                case "while":
+                    if(child_node_while_statement.display_error())
+                        return true;
+                    break;
+                case "for":
+                    if(child_node_for_statement.display_error())
+                        return true;
+                    break;
+                case "print":
+                    if(child_node_print_statement.display_error())
+                        return true;
+                    break;
+                case "assign":
+                    if(child_node_assignment_statement.display_error())
+                        return true;
+                    break;
+                default:
+                    break;
+            }
+        return false;
     }
 }
