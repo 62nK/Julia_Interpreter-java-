@@ -1,0 +1,75 @@
+#######################
+The program "src/Input/program2.txt" parsed is:
+function a()
+    s = b ^ 2 - 4 * a * c
+    print (r + 2)
+end
+#######################
+*#*#Parse Tree#*#*
+Level 0 Program node, children:
+	function: 'function'
+	function id: 'a'
+	block: 's = b ^ 2 - 4 * a * c
+    print (r + 2)'
+	terminal: 'end'
+- Level 1 Block node, children:
+	statement: 's = b ^ 2 - 4 * a * c'
+	block: 'print (r + 2)'
+- - Level 2 Statement node, child:
+	Assign statement: 's = b ^ 2 - 4 * a * c'
+- - - Level 3 Assign Statement node, children:
+	id: 's'
+	assignment_operator: '='
+	arithmetic expression: 'b ^ 2 - 4 * a * c'
+- - - - Level 4 Arithmetic Expression node, child:
+	binary expression: 'b ^ 2 - 4 * a * c'
+- - - - - Level 5 Binary Expression node, child:
+	assignment operator: 'sub_operator'
+	arithmetic expression1: 'b ^ 2'
+	arithmetic expression2: '4 * a * c'
+- - - - - - Level 6 Arithmetic Expression node, child:
+	binary expression: 'b ^ 2'
+- - - - - - - Level 7 Binary Expression node, child:
+	assignment operator: 'exp_operator'
+	arithmetic expression1: 'b'
+	arithmetic expression2: '2'
+- - - - - - - - Level 8 Arithmetic Expression node, child:
+	id: 'b'
+- - - - - - - - Level 8 Arithmetic Expression node, child:
+	literal integer: '2'
+- - - - - - Level 6 Arithmetic Expression node, child:
+	binary expression: '4 * a * c'
+- - - - - - - Level 7 Binary Expression node, child:
+	assignment operator: 'mul_operator'
+	arithmetic expression1: '4'
+	arithmetic expression2: 'a * c'
+- - - - - - - - Level 8 Arithmetic Expression node, child:
+	literal integer: '4'
+- - - - - - - - Level 8 Arithmetic Expression node, child:
+	binary expression: 'a * c'
+- - - - - - - - - Level 9 Binary Expression node, child:
+	assignment operator: 'mul_operator'
+	arithmetic expression1: 'a'
+	arithmetic expression2: 'c'
+- - - - - - - - - - Level 10 Arithmetic Expression node, child:
+	id: 'a'
+- - - - - - - - - - Level 10 Arithmetic Expression node, child:
+	id: 'c'
+- - Level 2 Block node, children:
+	statement: 'print (r + 2)'
+- - - Level 3 Statement node, child:
+	Print Statement: 'print (r + 2)'
+- - - - Level 4 For Statement node, children:
+	function: 'print'
+	arithmetic expression: 'r + 2'
+- - - - - Level 5 Arithmetic Expression node, child:
+	binary expression: 'r + 2'
+- - - - - - Level 6 Binary Expression node, child:
+	assignment operator: 'add_operator'
+	arithmetic expression1: 'r'
+	arithmetic expression2: '2'
+- - - - - - - Level 7 Arithmetic Expression node, child:
+	id: 'r'
+- - - - - - - Level 7 Arithmetic Expression node, child:
+	literal integer: '2'
+*#*#End of the Parse Tree#*#*

@@ -1,4 +1,3 @@
-function printsum()
-    # summary generates a summary of an object
-    println(summary(a), ": ", repr(a))
+function p()
+    print (a, repr(a))
 end
