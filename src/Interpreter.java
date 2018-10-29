@@ -10,7 +10,7 @@ public class Interpreter {
         Parser parser_instance;
 
         // Object initialization
-        filename = "program1"; // Julia program to parse
+        filename = "program2"; // Julia program to parse
         extension = ".txt"; // extension
         input_path = "src/Input/";  // input directory
         output_path = "src/Output/";    // output directory
